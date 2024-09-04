@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+<div class="flex justify-center items-center h-screen">
+  <div class="rounded-lg shadow-md w-full bg-white p-8 max-w-md">
+    <form method="POST" action="">
+      {% csrf_token %}
+      <h2 class="text-2xl font-bold">Create User</h2>
+      <div>
+        <label class="mt-2 font-semibold">First Name:</label>
+        <input
+          class="border border-2 rounded-md w-full"
+          type="text"
+          name="firstName"
+          placeholder="Enter first name"
+        />
+      </div>
+      <div>
+        <label class="mt-2 font-semibold">Last Name:</label>
+        <input
+          class="border border-2 w-full rounded-md"
+          type="text"
+          name="lastName"
+          placeholder="Enter last name"
+        />
+      </div>
+      <div>
+        <label class="mt-2 font-semibold">Email:</label>
+        <input
+          class="border border-2 w-full rounded-md"
+          type="email"
+          name="email"
+          placeholder="Example: JohnDoe@gmail.com"
+        />
+      </div>
+      <div class="flex items-center justify-center">
+        <button
+          class="button px-4 py-2 bg-blue-600 text-white rounded-md mt-4 hover:bg-blue-900"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

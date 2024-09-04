@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="card mt-8">
+    <div class="card-header text-center text-blue-500">Employee Details</div>
+    <div class="card-body">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for employee in employees %}
+          <tr>
+            <th scope="row">{{employee.id}}</th>
+            <td>{{employee.first_name}}</td>
+            <td>{{employee.last_name}}</td>
+            <td>{{employee.email}}</td>
+            <td>
+              <a
+                class="text-blue-500"
+                href="{% url 'update-employee' employee.id %}"
+                >Update</a
+              >
+            </td>
+            <td>
+              <a
+                class="text-blue-500"
+                href="{% url 'delete-employee' employee.id %}"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="flex justify-center gap-4 mt-4">
+    <a class="btn btn-primary" href="{% url 'create-employee' %}"
+      >Create Employee</a
+    >
+  </div>
+  <!-- <form action="" method="POST">{% csrf_token %}{{form}}</form> -->
+</div>
+
+{% endblock content %}
