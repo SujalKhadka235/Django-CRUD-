@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import EmployeeForm
 from .models import Person
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth.models import User
 
 
 # Create your views here.
 def index(request):
-    return render(request, "base.html")
+    users = User.objects.count()
+    context = {"users": users}
+    return render(request, "base.html", context)
 
 
 def employee(request):
@@ -47,8 +52,24 @@ def updateEmployee(request, pk):
         obj.last_name = newLastName
         obj.email = newEmail
         obj.save()
-        return redirect("employee")
+        return redirect("home")
     return render(request, "employee/update-employee.html")
+
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            user = User.objects.create(
+                username=data["username"],
+            )
+            user.set_password(data["password1"])
+            user.save()
+            return redirect("home")
+    form = UserCreationForm()
+    context = {"form": form}
+    return render(request, "register.html", context)
 
 
 def deleteEmployee(request, pk):
@@ -56,3 +77,7 @@ def deleteEmployee(request, pk):
         obj = Person.objects.get(id=pk)
         obj.delete()
         return redirect("employee")
+
+
+def login(request):
+    return render(request, "login.html")

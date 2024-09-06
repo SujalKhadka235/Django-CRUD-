@@ -3,5 +3,35 @@
     <a href="{% url 'home' %}" class="text-3xl text-white">Home</a>
     <a href="{% url 'employee' %}" class="text-3xl text-white">Employee</a>
     <a href="{% url 'employer' %}" class="text-3xl text-white">Employer</a>
+
+    <div class="dropdown">
+      <button class="text-white text-xl">Settings</button>
+      <div class="content bg-blue-500">
+        <a href="{% url 'register' %}" class="text-white text-sm">Register</a>
+        <a href="{% url 'login' %}" class="text-white text-sm">Login</a>
+      </div>
+    </div>
   </nav>
 </div>
+<style>
+  .dropdown button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  .dropdown a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+  }
+  .dropdown .content {
+    display: none;
+    position: absolute;
+    min-width: 100px;
+    box-shadow: 2px 2px 5px black;
+  }
+  .dropdown:hover .content {
+    display: block;
+  }
+</style>

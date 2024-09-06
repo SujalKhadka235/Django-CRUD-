@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="h-screen font-sans flex justify-center items-center bg-gray-100">
+  <div class="bg-gray-200 p-8 rounded-md shadow-md border-blue-500 border-2">
+    <h2 class="text-3xl font-bold mb-4">Register Page</h2>
+    <form method="POST" action="" class="space-y-4">
+      {% csrf_token %} {% for field in form %}
+      <div><label class="text-xl"> {{field.label_tag}}</label>{{field}}</div>
+      {% endfor %}
+      <!-- <div>
+        <label class="text-xl"> Second Name:</label
+        ><input
+          class="border border-blue-500 border-2 border-solid rounded-sm w-full"
+          type="text"
+          placeholder="example: Doe"
+          name="lastName"
+        />
+      </div>
+      <div>
+        <label class="text-xl">Email:</label
+        ><input
+          class="border border-blue-500 border-2 border-solid rounded-sm w-full"
+          type="email"
+          placeholder="example: JohnDoe@gmail.com"
+          name="email"
+        />
+      </div>
+      <div>
+        <label class="text-xl">Password:</label
+        ><input
+          class="border border-blue-500 border-2 border-solid rounded-sm w-full"
+          type="password"
+          placeholder="example: JohnDoe@gmail.com"
+          name="password"
+        />
+      </div> -->
+      {% if field.errors %}
+      <p class="text-red text-sm">{{field.errors}}</p>
+      {% endif %}
+      <div class="text-center">
+        <button
+          type="submit"
+          class="bg-blue-500 text-white rounded-md px-3 py-2 hover:bg-blue-700 mt-4"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}
