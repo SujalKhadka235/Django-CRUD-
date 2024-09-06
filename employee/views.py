@@ -3,12 +3,13 @@ from django.http import HttpResponse
 from .forms import EmployeeForm
 from .models import Person
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 
 # Create your views here.
 def index(request):
+
     users = User.objects.count()
     context = {"users": users}
     return render(request, "base.html", context)
@@ -29,6 +30,7 @@ def employee(request):
     return render(request, "employee/employee.html", context)
 
 
+@login_required
 def createEmployee(request):
     if request.method == "POST":
         data = request.POST
@@ -41,6 +43,7 @@ def createEmployee(request):
     return render(request, "employee/create-employee.html")
 
 
+@login_required
 def updateEmployee(request, pk):
     if request.method == "POST":
         data = request.POST
@@ -72,6 +75,7 @@ def register(request):
     return render(request, "register.html", context)
 
 
+@login_required
 def deleteEmployee(request, pk):
     if request.method == "GET":
         obj = Person.objects.get(id=pk)

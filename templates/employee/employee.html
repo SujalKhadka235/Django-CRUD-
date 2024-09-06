@@ -21,6 +21,7 @@
             <td>{{employee.first_name}}</td>
             <td>{{employee.last_name}}</td>
             <td>{{employee.email}}</td>
+            {% if user.is_authenticated %}
             <td>
               <a
                 class="text-blue-500"
@@ -35,17 +36,20 @@
                 >Delete</a
               >
             </td>
+            {% endif %}
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
+  {% if user.is_authenticated %}
   <div class="flex justify-center gap-4 mt-4">
     <a class="btn btn-primary" href="{% url 'create-employee' %}"
       >Create Employee</a
     >
   </div>
+  {% endif %}
   <!-- <form action="" method="POST">{% csrf_token %}{{form}}</form> -->
 </div>
 
