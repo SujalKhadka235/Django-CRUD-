@@ -9,3 +9,8 @@ class loginForm(forms.Form):
     class meta:
         model = User
         fields = ["__all__"]
+
+
+class profileForm(forms.Form):
+    first_name = forms.CharField()
+    last_name = forms.CharField()

@@ -9,6 +9,7 @@
       <div class="content bg-blue-500">
         {% if user.is_authenticated %}
         <a href="{% url 'logout' %}" class="text-white text-sm">Logout</a>
+        <a href="{% url 'profile' %}" class="text-white text-sm">Profile</a>
         {% else %}
         <a href="{% url 'register' %}" class="text-white text-sm">Register</a>
         <a href="{% url 'login' %}" class="text-white text-sm">Login</a>

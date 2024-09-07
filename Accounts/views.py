@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .forms import loginForm
+from .forms import loginForm, profileForm
 from django.contrib.auth import login, authenticate, logout
 
 
@@ -41,3 +41,23 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect("home")
+
+
+def user_profile(request):
+    if request.method == "POST":
+        data = request.POST
+        firstName = data["first_name"]
+        lastName = data["last_name"]
+        user_obj = User.objects.get(id=request.user.id)
+        user_obj.first_name = firstName
+        user_obj.last_name = lastName
+        user_obj.save()
+        return redirect("home")
+    form = profileForm(
+        initial={
+            "first_name": request.user.first_name,
+            "last_name": request.user.last_name,
+        }
+    )
+    context = {"form": form}
+    return render(request, "profile.html", context)
