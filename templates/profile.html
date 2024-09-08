@@ -3,18 +3,20 @@
 <div class="h-screen font-sans flex justify-center items-center bg-gray-100">
   <div class="bg-gray-200 p-8 rounded-md shadow-md border-blue-500 border-2">
     <h2 class="text-3xl font-bold mb-4 text-center">Update Profile Page</h2>
-    <div class="grid grid-cols-2">
-      <div>
-        <img
-          src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          class="avatar img-circle img-thumbnail"
-          alt="avatar"
-        />
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block file-upload" />
-      </div>
-      <div class="flex justify-center items-center">
-        <form method="POST" action="" class="space-y-4">
+    <form method="POST" action="" class="" enctype="multipart/form-data">
+      <div class="grid grid-cols-2">
+        <div>
+          <img
+            class="h-80 w-70"
+            src="{{request.user.profile.image.url}}"
+            class="avatar img-circle img-thumbnail"
+            alt="avatar"
+          />
+          <h6>Upload a different photo...</h6>
+          {{profileForm}}
+          <!-- <input type="file" class="text-center center-block file-upload" /> -->
+        </div>
+        <div class="flex justify-center items-center">
           {% csrf_token %} {% for field in form %}
           <div>
             <label class="text-xl"> {{field.label_tag}}</label>
@@ -31,9 +33,9 @@
               Update
             </button>
           </div>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 {% endblock content %}

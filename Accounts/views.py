@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .forms import loginForm, profileForm
+from .forms import loginForm, profileForm, profileModelForm
 from django.contrib.auth import login, authenticate, logout
 
 
@@ -45,6 +45,12 @@ def user_logout(request):
 
 def user_profile(request):
     if request.method == "POST":
+        profile_form = profileModelForm(
+            request.POST, request.FILES, instance=request.user.profile
+        )
+        if profile_form.is_valid():
+            profile_form.save()
+
         data = request.POST
         firstName = data["first_name"]
         lastName = data["last_name"]
@@ -57,7 +63,8 @@ def user_profile(request):
         initial={
             "first_name": request.user.first_name,
             "last_name": request.user.last_name,
+            "images": request.user.profile.image.url,
         }
     )
-    context = {"form": form}
+    context = {"form": form, "profileForm": profileModelForm()}
     return render(request, "profile.html", context)

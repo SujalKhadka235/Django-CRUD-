@@ -3,6 +3,8 @@ from . import views
 from employer.views import employer
 from products.views import productsHome
 from Accounts.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.index, name="home"),
@@ -16,3 +18,5 @@ urlpatterns = [
     path("logout/", user_logout, name="logout"),
     path("profile/", user_profile, name="profile"),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
